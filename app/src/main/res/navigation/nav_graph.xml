@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.samsung.android.blog.MainFragment"
+        android:label="Blog"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.samsung.android.blog.DetailFragment"
+        android:label="Post"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="postId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_detailFragment_to_editorFragment"
+            app:destination="@id/editorFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/editorFragment"
+        android:name="com.samsung.android.blog.EditorFragment"
+        android:label="Edit"
+        tools:layout="@layout/fragment_editor" >
+        <argument
+            android:name="post"
+            app:argType="com.samsung.android.blog.data.Post" />
+    </fragment>
+</navigation>

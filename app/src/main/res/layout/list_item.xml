@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="itemListener"
+            type="com.samsung.android.blog.PostListAdapter.ListItemListener" />
+        <variable
+            name="post"
+            type="com.samsung.android.blog.data.Post" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> itemListener.onItemClicked(post.id)}"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/postId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text='@{"Post #" + String.valueOf(post.id)}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Post #1" />
+
+        <TextView
+            android:id="@+id/postTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{post.title}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postId"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/postContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{post.content}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postTitle"
+            tools:text="Content\nContent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
