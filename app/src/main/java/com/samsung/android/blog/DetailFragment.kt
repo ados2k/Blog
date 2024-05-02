@@ -1,31 +1,35 @@
 package com.samsung.android.blog
 
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import android.os.Bundle
-import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.onNavDestinationSelected
 import com.samsung.android.blog.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel: DetailViewModel by viewModels()
     private val args: DetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu_detail, menu)
             }
+
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.action_edit -> editPost()
@@ -34,10 +38,8 @@ class DetailFragment : Fragment() {
                 }
             }
         }, viewLifecycleOwner)
-        
-        viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
-        viewModel.setPostId(args.postId)
 
+        viewModel.setPostId(args.postId)
         viewModel.result.observe(viewLifecycleOwner) {
             if (!it.isEmpty()) {
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()

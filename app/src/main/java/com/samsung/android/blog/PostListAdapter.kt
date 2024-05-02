@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.samsung.android.blog.data.Post
 import com.samsung.android.blog.databinding.ListItemBinding
 
-class PostListAdapter(private val listener: ListItemListener) : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
+class PostListAdapter(private val listener: ListItemListener) :
+    RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
     private var postList = emptyList<Post>()
 
     fun setData(items: List<Post>) {
@@ -14,8 +15,7 @@ class PostListAdapter(private val listener: ListItemListener) : RecyclerView.Ada
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(val binding: ListItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Post) {
             binding.post = item
             binding.itemListener = listener

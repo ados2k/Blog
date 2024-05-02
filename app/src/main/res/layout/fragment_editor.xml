@@ -5,11 +5,11 @@
 
     <data>
         <variable
-            name="fragment"
-            type="com.samsung.android.blog.EditorFragment" />
-        <variable
             name="viewModel"
             type="com.samsung.android.blog.EditorViewModel" />
+        <variable
+            name="fragment"
+            type="com.samsung.android.blog.EditorFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textTitle"
+            android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -39,19 +39,20 @@
 
         <EditText
             android:id="@+id/editTitle"
-            android:text="@={viewModel.title}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="text"
+            android:text="@={viewModel.title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
             android:id="@+id/textContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,12 +60,12 @@
 
         <EditText
             android:id="@+id/editContent"
-            android:text="@={viewModel.content}"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="300dp"
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"
+            android:text="@={viewModel.content}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textContent" />
@@ -74,8 +75,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:onClick="@{() -> fragment.updatePost()}"
             android:text="Save"
+            android:onClick="@{() -> fragment.updatePost()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editContent" />
 
@@ -84,8 +85,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
-            android:onClick="@{() -> fragment.cancel()}"
             android:text="Cancel"
+            android:onClick="@{() -> fragment.cancel()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editContent" />
 

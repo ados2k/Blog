@@ -3,7 +3,12 @@ package com.samsung.android.blog.rest
 import com.samsung.android.blog.data.Post
 import com.samsung.android.blog.data.PostList
 import com.samsung.android.blog.data.User
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.PUT
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface BlogApi {
     @GET("posts")

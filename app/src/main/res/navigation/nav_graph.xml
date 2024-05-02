@@ -33,7 +33,7 @@
     <fragment
         android:id="@+id/editorFragment"
         android:name="com.samsung.android.blog.EditorFragment"
-        android:label="Edit"
+        android:label="Editor"
         tools:layout="@layout/fragment_editor" >
         <argument
             android:name="post"

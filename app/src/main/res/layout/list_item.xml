@@ -5,11 +5,12 @@
 
     <data>
         <variable
-            name="itemListener"
-            type="com.samsung.android.blog.PostListAdapter.ListItemListener" />
-        <variable
             name="post"
             type="com.samsung.android.blog.data.Post" />
+
+        <variable
+            name="itemListener"
+            type="com.samsung.android.blog.PostListAdapter.ListItemListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +25,6 @@
             android:layout_height="wrap_content"
             android:text='@{"Post #" + String.valueOf(post.id)}'
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Post #1" />
@@ -47,9 +47,10 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:text="@{post.content}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/postTitle"
-            tools:text="Content\nContent" />
+            tools:text="Content\nContent\nContent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

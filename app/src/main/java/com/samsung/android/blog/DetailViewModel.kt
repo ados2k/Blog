@@ -8,9 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.samsung.android.blog.data.Post
 import com.samsung.android.blog.data.User
 import com.samsung.android.blog.rest.RetrofitInstance
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 private const val TAG = "DetailViewModel"
 
@@ -27,37 +25,34 @@ class DetailViewModel : ViewModel() {
     val loading: LiveData<Boolean>
         get() = _loading
 
+    private val _result = MutableLiveData("")
+    val result: LiveData<String>
+        get() = _result
+
     fun setPostId(postId: Int) {
         if (_loading.value!!) return
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    _loading.postValue(true)
-                    val retPost = RetrofitInstance.api.getPost(postId)
-                    val retUser = RetrofitInstance.api.getUser(retPost.userId)
-                    _post.postValue(retPost)
-                    _user.postValue(retUser)
-                } catch (e: Exception) {
-                    Log.e(TAG, "Exception $e")
-                } finally {
-                    _loading.postValue(false)
-                }
+            try {
+                _loading.value = true
+                val retPost = RetrofitInstance.api.getPost(postId)
+                val retUser = RetrofitInstance.api.getUser(retPost.userId)
+                _post.value = retPost
+                _user.value = retUser
+            } catch (e: Exception) {
+                Log.e(TAG, "Exception $e")
+            } finally {
+                _loading.value = false
             }
         }
     }
 
-    private val _result = MutableLiveData("")
-    val result: LiveData<String>
-        get() = _result
     fun deletePost() {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    RetrofitInstance.api.deletePost(_post.value!!.id)
-                    _result.postValue("Success")
-                } catch (e: Exception) {
-                    _result.postValue("Error $e")
-                }
+            try {
+                RetrofitInstance.api.deletePost(_post.value!!.id)
+                _result.value = "Success"
+            } catch (e: Exception) {
+                _result.value = "Error $e"
             }
         }
     }

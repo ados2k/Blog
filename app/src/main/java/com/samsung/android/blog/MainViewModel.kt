@@ -7,9 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.samsung.android.blog.data.Post
 import com.samsung.android.blog.rest.RetrofitInstance
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 private const val TAG = "MainViewModel"
 
@@ -25,19 +23,18 @@ class MainViewModel : ViewModel() {
     init {
         getPosts()
     }
+
     fun getPosts() {
         if (_loading.value!!) return
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    _loading.postValue(true)
-                    val retPosts = RetrofitInstance.api.getPosts(_postList.value!!.size)
-                    _postList.postValue(_postList.value!! + retPosts.posts)
-                } catch (e: Exception) {
-                    Log.e(TAG, "Exception $e")
-                } finally {
-                    _loading.postValue(false)
-                }
+            try {
+                _loading.value = true
+                val retPosts = RetrofitInstance.api.getPosts(_postList.value!!.size)
+                _postList.value = _postList.value!! + retPosts.posts
+            } catch (e: Exception) {
+                Log.e(TAG, "Exception $e")
+            } finally {
+                _loading.value = false
             }
         }
     }
