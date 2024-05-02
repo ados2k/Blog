@@ -1,3 +1,3 @@
 # Blog
 
-### Built by Android Studio Electric Eel | 2022.1.1 Patch 2 (February 27, 2023)
+### Built by Android Studio Iguana | 2023.2.1 (February 22, 2024)
